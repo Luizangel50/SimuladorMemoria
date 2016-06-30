@@ -1,4 +1,4 @@
---- Tempo de execucao:  9.48400020599  segundos ---
+--- Tempo de execucao:  9.81100010872  segundos ---
 L1 Hits:  848106
 L1 Misses:  151894
 
@@ -7,4 +7,4 @@ L2 Misses:  46305
 
 Acessos a Memoria:  46766
 
-Tempo em clocks:  2479851
+Tempo em clocks:  6248571
