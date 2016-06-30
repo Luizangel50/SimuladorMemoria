@@ -16,14 +16,18 @@ class Estatisticas:
 		self.acessos_memoria = 0
 
 	def imprimir_estatisticas(self, tempo_execucao, clock):
-		print "--- Tempo de execucao: ", tempo_execucao, " segundos ---"
+		saida = open("resultados.txt", "w")
 
-		print "L1 Hits: ", self.hits_L1
-		print "L1 Misses: ", self.misses_L1
+		print >> saida,  "--- Tempo de execucao: ", tempo_execucao, " segundos ---"
+
+		print >> saida, "L1 Hits: ", self.hits_L1
+		print >> saida, "L1 Misses: ", self.misses_L1
 		
-		print "\nL2 Hits: ", self.hits_L2
-		print "L2 Misses: ", self.misses_L2
+		print >> saida, "\nL2 Hits: ", self.hits_L2
+		print >> saida, "L2 Misses: ", self.misses_L2
 
-		print "\nAcessos a Memoria: ", self.acessos_memoria
+		print >> saida, "\nAcessos a Memoria: ", self.acessos_memoria
 
-		print "\nTempo em clocks: ", clock
+		print >> saida, "\nTempo em clocks: ", clock
+
+		saida.close()

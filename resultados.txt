@@ -1,0 +1,10 @@
+--- Tempo de execucao:  9.48400020599  segundos ---
+L1 Hits:  848106
+L1 Misses:  151894
+
+L2 Hits:  199457
+L2 Misses:  46305
+
+Acessos a Memoria:  46766
+
+Tempo em clocks:  2479851
