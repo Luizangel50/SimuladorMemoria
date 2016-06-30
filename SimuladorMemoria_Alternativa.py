@@ -1,6 +1,6 @@
 import Estatisticas
 import CacheL1
-import CacheL2
+import CacheL2_Alternativa as CacheL2
 import time
 
 def main():
@@ -18,13 +18,13 @@ def main():
 	cacheL1 = CacheL1.CacheL1(32, 64, 8)
 
 	# Objeto que representa a Cache L2
-	cacheL2 = CacheL2.CacheL2(4096, 64, 16)
+	cacheL2 = CacheL2.CacheL2_Alternativa(4096, 64, 16)
 
 	# Chamando funcao que executa a simulacao de memoria
 	acesso(start_time, cacheL1, cacheL2, estatisticas)
 
 	# Imprimindo estatisticas na saida
-	estatisticas.imprimir_estatisticas(time.time() - start_time, "resultados.txt")
+	estatisticas.imprimir_estatisticas(time.time() - start_time, "resultados_Alternativa.txt")
 
 	############################ Pequena explicacao da politica de read e write ###############################
 	################## Read #################
@@ -35,9 +35,9 @@ def main():
 
 	################## Write #################
 	# Tem em L1 em L2, grava em L1 e L2 (tempo de L2)
-	# Tem em L1 e nao L2, grava em L1 e memoria (tempo de memoria)
+	# Tem em L1 e nao L2, grava em L1 e L2 (tempo de L2)
 	# Nao tem em L1 e tem em L2, grava em L2 e L1 (tempo de L2)
-	# Nao tem em nenhum lugar, grava em L1 e memoria (tempo de memoria)
+	# Nao tem em nenhum lugar, grava em L1 e L2 (tempo de memoria)
 
 
 def acesso(start_time, cacheL1, cacheL2, estatisticas):
@@ -84,9 +84,9 @@ def acesso(start_time, cacheL1, cacheL2, estatisticas):
 
 				# Write miss em L2
 				elif not writehit_L2:
-					# Contar apenas o tempo de acesso a memoria
-					estatisticas.clock += 60 - (cacheL1.tempo_acesso + cacheL1.tempo_tag)
-					estatisticas.acessos_memoria += 1
+					# Contar apenas o tempo de acesso e de comparacao de tag de L2
+					estatisticas.clock -= (cacheL1.tempo_acesso + cacheL1.tempo_tag)
+					estatisticas.clock += (cacheL2.tempo_acesso + cacheL2.tempo_tag)
 
 			# Write miss em L1
 			if not writehit_L1:

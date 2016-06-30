@@ -18,19 +18,28 @@ class Estatisticas:
 		# Contador do tempo em clocks
 		self.clock = 0
 
-	def imprimir_estatisticas(self, tempo_execucao):
-		saida = open("resultados.txt", "w")
+		# Estatisticas para leitura
+		self.leituras = 0
 
-		print >> saida,  "--- Tempo de execucao: ", tempo_execucao, " segundos ---"
+		# Estatisticas para escrita
+		self.escritas = 0
 
-		print >> saida, "L1 Hits: ", self.hits_L1
-		print >> saida, "L1 Misses: ", self.misses_L1
+	def imprimir_estatisticas(self, tempo_execucao, arquivo_saida):
+		saida = open(arquivo_saida, "w")
+
+		print >> saida, "--- Tempo de execucao: ", tempo_execucao, " segundos ---"
+
+		print >> saida, "\nLeituras: ", self.leituras, "(", float(self.leituras)/float(10000), "%)"
+		print >> saida, "Escritas: ", self.escritas, "(", float(self.escritas)/float(10000), "%)"
+
+		print >> saida, "\nL1 Hits: ", self.hits_L1, "(", float(self.hits_L1)/float(10000), "%)"
+		print >> saida, "L1 Misses: ", self.misses_L1, "(", float(self.misses_L1)/float(10000), "%)"
 		
-		print >> saida, "\nL2 Hits: ", self.hits_L2
-		print >> saida, "L2 Misses: ", self.misses_L2
+		print >> saida, "\nL2 Hits: ", self.hits_L2, "(", float(self.hits_L2*100)/float(self.hits_L2+self.misses_L2), "%)"
+		print >> saida, "L2 Misses: ", self.misses_L2, "(", float(self.misses_L2*100)/float(self.hits_L2+self.misses_L2), "%)"
 
-		print >> saida, "\nAcessos a Memoria: ", self.acessos_memoria
+		print >> saida, "\nAcessos a Memoria Principal: ", self.acessos_memoria, "(", float(self.acessos_memoria)/float(10000), "%)"
 
-		print >> saida, "\nTempo em clocks: ", self.clock
+		print >> saida, "\nTempo total em clocks: ", self.clock
 
 		saida.close()

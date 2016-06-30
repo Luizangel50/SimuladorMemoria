@@ -40,6 +40,7 @@ class CacheL1:
 		set = endereco_traduzido[1]
 		tag = endereco_traduzido[0]
 		for i in range(0, self.vias):
+			# Read hit
 			if self.cache[set][i] == tag:
 				estatisticas.hits_L1 += 1
 				estatisticas.clock += self.tempo_acesso + self.tempo_tag				# Incremento do clock
@@ -51,6 +52,7 @@ class CacheL1:
 
 	def atualizar_fifo(self, set):
 		"""Atualiza a fila de blocos em um set"""
+		
 		for i in range(0, self.vias-1):
 			self.fifo[set][i] = self.fifo[set][i+1]
 
