@@ -1,7 +1,6 @@
 import Estatisticas
 import CacheL1
 import CacheL2
-import os
 import time
 
 def main():
